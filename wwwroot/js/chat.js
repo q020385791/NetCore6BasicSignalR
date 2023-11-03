@@ -1,9 +1,12 @@
 ﻿"use strict";
 
+//SignalR連線
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
+
+
 
 //取得使用者與訊息
 connection.on("ReceiveMessage", function (user, message) {
@@ -42,6 +45,8 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
+
+//送出至Hub
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;
